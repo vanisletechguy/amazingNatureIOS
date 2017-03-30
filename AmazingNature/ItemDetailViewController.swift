@@ -20,6 +20,8 @@ class ItemDetailViewController: UITableViewController {
    
     @IBOutlet weak var datePicker: UIDatePicker!
     
+    @IBOutlet weak var doneBarBtn: UIBarButtonItem!
+    @IBOutlet weak var dateSeen: UILabel!
     var location: CLLocation?
     var locationManager = CLLocationManager()
     var creatureToEdit:Creature? = nil
@@ -27,9 +29,11 @@ class ItemDetailViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        doneBarBtn.isEnabled = true
         //create a test creature
         let newLocation = CLLocation(latitude: 49.9, longitude: -126.4)
         let newDate = Date();
+        
         
         let newImage = UIImage()
         creatureToEdit = Creature(category: CreatureCategory.Amphibians, title: "Cool Frog", description: "a frog i saw at the lake", location: newLocation, locationDescription: "Some Location description", dateSeen: newDate, image: newImage)
@@ -43,11 +47,26 @@ class ItemDetailViewController: UITableViewController {
     }
 
     
+    @IBAction func dateChanged(_ sender: UIDatePicker) {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM-dd-YYYY"
+        dateSeen.text = dateFormatter.string(from: datePicker.date)
+    }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 1 {
             pickPhoto()
             tableView.deselectRow(at: indexPath, animated: true)
         }
+    }
+
+    override func tableView(_ tableView: UITableView,
+                            heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.row == 1 {
+            return itemImage.isHidden ? 44 : 280
+        } else if indexPath.row == 5 {
+            return 88
+        }
+        return 44
     }
 
     

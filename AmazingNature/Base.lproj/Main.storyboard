@@ -622,6 +622,9 @@
                                                     <date key="date" timeIntervalSinceReferenceDate="508225595.39859903">
                                                         <!--2017-02-08 05:46:35 +0000-->
                                                     </date>
+                                                    <connections>
+                                                        <action selector="dateChanged:" destination="Eg5-Pn-XyI" eventType="valueChanged" id="g1A-BR-Wdt"/>
+                                                    </connections>
                                                 </datePicker>
                                             </subviews>
                                         </tableViewCellContentView>
@@ -654,6 +657,8 @@
                     </navigationItem>
                     <connections>
                         <outlet property="datePicker" destination="tGM-ph-duR" id="E2W-iS-Jri"/>
+                        <outlet property="dateSeen" destination="WAR-75-HWC" id="0nL-eH-jKW"/>
+                        <outlet property="doneBarBtn" destination="Ng5-72-9zP" id="TR3-19-lh2"/>
                         <outlet property="itemImage" destination="fHl-BZ-qkB" id="LAV-53-in5"/>
                         <outlet property="locationDescription" destination="RnJ-bh-XGp" id="EdQ-r3-M9u"/>
                         <outlet property="nameOfTheItem" destination="WIr-B1-0XN" id="c9W-J4-lpk"/>
