@@ -7,9 +7,22 @@
 //
 
 import UIKit
+import CoreLocation
 
 class ItemDetailViewController: UITableViewController {
 
+    
+    @IBOutlet weak var nameOfTheItem: UITextField!
+    
+    @IBOutlet weak var itemImage: UIImageView!
+    
+    @IBOutlet weak var locationDescription: UITextField!
+   
+    @IBOutlet weak var datePicker: UIDatePicker!
+    
+    var location: CLLocation?
+    var locationManager = CLLocationManager()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -28,13 +41,15 @@ class ItemDetailViewController: UITableViewController {
 
 
     
-    
     @IBAction func cancelBtnClicked(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
     
     @IBAction func doneBtnClicked(_ sender: Any) {
     }
+    
+    
+    
     /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
