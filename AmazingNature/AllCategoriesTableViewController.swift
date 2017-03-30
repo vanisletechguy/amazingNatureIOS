@@ -24,7 +24,7 @@ class AllCategoriesTableViewController: UITableViewController {
                             didSelectRowAt indexPath: IndexPath) {
         print("herefirst")
         if indexPath.row == 1 {
-            //pickPhoto()
+
             print("clicked here")
             tableView.deselectRow(at: indexPath, animated: true)
         }
