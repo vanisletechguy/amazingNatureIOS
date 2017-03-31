@@ -328,10 +328,10 @@
             </objects>
             <point key="canvasLocation" x="3098.4000000000001" y="131.78410794602701"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Sub Categories Table View Controller-->
         <scene sceneID="D39-KP-4Wx">
             <objects>
-                <tableViewController id="bZw-CY-SGN" sceneMemberID="viewController">
+                <tableViewController id="bZw-CY-SGN" customClass="SubCategoriesTableViewController" customModule="AmazingNature" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="0nV-HQ-LH8">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -352,6 +352,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="8zk-sE-pzl">
+                        <barButtonItem key="leftBarButtonItem" title="Back" id="QKv-PO-d5T">
+                            <connections>
+                                <action selector="backBtnPressed:" destination="bZw-CY-SGN" id="Q7z-6C-sEP"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="Hsn-7u-zxK">
                             <connections>
                                 <segue destination="B0u-Dy-Ovo" kind="show" identifier="addNewItemSegue" id="NsX-PL-wLf"/>

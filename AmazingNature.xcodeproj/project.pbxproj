@@ -16,6 +16,7 @@
 		84A564CC1E8C747900D439CA /* AllCategoriesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A564CB1E8C747900D439CA /* AllCategoriesTableViewController.swift */; };
 		84A564CE1E8C791500D439CA /* ItemDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A564CD1E8C791500D439CA /* ItemDetailViewController.swift */; };
 		84A564D11E8C865400D439CA /* Creature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A564D01E8C865400D439CA /* Creature.swift */; };
+		84A564D31E8F20D400D439CA /* SubCategoriesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A564D21E8F20D400D439CA /* SubCategoriesTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		84A564CB1E8C747900D439CA /* AllCategoriesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllCategoriesTableViewController.swift; sourceTree = "<group>"; };
 		84A564CD1E8C791500D439CA /* ItemDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemDetailViewController.swift; sourceTree = "<group>"; };
 		84A564D01E8C865400D439CA /* Creature.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Creature.swift; sourceTree = "<group>"; };
+		84A564D21E8F20D400D439CA /* SubCategoriesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubCategoriesTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,13 +64,13 @@
 		84A564B61E8C673900D439CA /* AmazingNature */ = {
 			isa = PBXGroup;
 			children = (
+				84A564D41E8F21D700D439CA /* Models */,
 				84A564B71E8C673900D439CA /* AppDelegate.swift */,
 				84A564CF1E8C85ED00D439CA /* View Controllers */,
 				84A564BB1E8C673900D439CA /* Main.storyboard */,
 				84A564BE1E8C673900D439CA /* Assets.xcassets */,
 				84A564C01E8C673900D439CA /* LaunchScreen.storyboard */,
 				84A564C31E8C673900D439CA /* Info.plist */,
-				84A564D01E8C865400D439CA /* Creature.swift */,
 			);
 			path = AmazingNature;
 			sourceTree = "<group>";
@@ -80,8 +82,17 @@
 				84A564B91E8C673900D439CA /* ViewController.swift */,
 				84A564CB1E8C747900D439CA /* AllCategoriesTableViewController.swift */,
 				84A564C91E8C69FB00D439CA /* MapViewController.swift */,
+				84A564D21E8F20D400D439CA /* SubCategoriesTableViewController.swift */,
 			);
 			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		84A564D41E8F21D700D439CA /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				84A564D01E8C865400D439CA /* Creature.swift */,
+			);
+			name = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -157,6 +168,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				84A564CE1E8C791500D439CA /* ItemDetailViewController.swift in Sources */,
+				84A564D31E8F20D400D439CA /* SubCategoriesTableViewController.swift in Sources */,
 				84A564BA1E8C673900D439CA /* ViewController.swift in Sources */,
 				84A564D11E8C865400D439CA /* Creature.swift in Sources */,
 				84A564CA1E8C69FB00D439CA /* MapViewController.swift in Sources */,
