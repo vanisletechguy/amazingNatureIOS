@@ -2,7 +2,7 @@
 //  Creature.swift
 //  AmazingNature
 //
-//  Created by vm mac on 2017-03-29.
+//  Created by Michael Aubie on 2017-03-29.
 //  Copyright © 2017 Michael Aubie. All rights reserved.
 //
 
@@ -10,7 +10,7 @@ import Foundation
 import CoreLocation
 import UIKit
 
-enum CreatureCategory {
+enum CreatureCategory: Int{
     case Mammals, Birds, Fish, Reptiles, Amphibians, Invertebrates, Trees,
     Flowers, Fungi, PlantOther, Cliffs, Rivers, Lakes, Rocks, Waterfalls,
     GeoOther

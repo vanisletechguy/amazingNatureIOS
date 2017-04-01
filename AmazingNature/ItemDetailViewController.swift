@@ -34,10 +34,8 @@ class ItemDetailViewController: UITableViewController {
         let newLocation = CLLocation(latitude: 49.9, longitude: -126.4)
         let newDate = Date();
         
-        
         let newImage = UIImage()
         creatureToEdit = Creature(category: CreatureCategory.Amphibians, title: "Cool Frog", description: "a frog i saw at the lake", location: newLocation, locationDescription: "Some Location description", dateSeen: newDate, image: newImage)
-        
         
     }
 
