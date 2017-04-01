@@ -26,6 +26,10 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let tabbarController = segue.destination as! UITabBarController
+        let navVC = tabbarController.viewControllers?[0] as! UINavigationController
+        let categoriesVC = navVC.topViewController as! AllCategoriesTableViewController
+    }
 }
 
