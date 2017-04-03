@@ -15,23 +15,23 @@ enum CreatureCategory: Int{
     Flowers, Fungi, PlantOther, Cliffs, Rivers, Lakes, Rocks, Waterfalls,
     GeoOther
 }
-class Creature {
+class Creature: NSObject {
     var category = CreatureCategory.Birds
     var title = ""
-    var description = ""
+    var creatureDescription = ""
     var location = CLLocation()
     var locationDescription = ""
     var dateSeen = Date()
     var image: UIImage? = nil
     
     
-    init(category: CreatureCategory, title:String, description:String,
+    init(category: CreatureCategory, title:String, creatureDescription:String,
          location:CLLocation, locationDescription:String, dateSeen:Date,
          image:UIImage) {
         
         self.category = category
         self.title = title
-        self.description = description
+        self.creatureDescription = creatureDescription
         self.location = location
         self.locationDescription = locationDescription
         self.dateSeen = dateSeen

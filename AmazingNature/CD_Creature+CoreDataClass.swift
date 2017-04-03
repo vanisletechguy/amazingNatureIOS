@@ -13,7 +13,7 @@ import CoreData
 public class CD_Creature: NSManagedObject {
     func copyCreature(newItem: Creature ) {
         self.name = newItem.title
-        self.notes = newItem.description
+        self.notes = newItem.creatureDescription
         self.date = newItem.dateSeen as NSDate?;
         self.latitude = newItem.location.coordinate.latitude
         self.longitude = newItem.location.coordinate.longitude

@@ -9,22 +9,33 @@
 import UIKit
 import CoreLocation
 
-class ItemDetailViewController: UITableViewController {
 
+protocol ItemDetailViewControllerDelegate: class {
+    func itemDetailViewControllerDidCancel(_ controller:
+        ItemDetailViewController)
+    func itemDetailViewController(_ controller: ItemDetailViewController,
+                                  didFinishAdding item: Creature)
+    func itemDetailViewController(_ controller: ItemDetailViewController,
+                                  didFinishEditing item: Creature)
+}
+
+
+class ItemDetailViewController: UITableViewController {
     
     @IBOutlet weak var nameOfTheItem: UITextField!
-    
     @IBOutlet weak var itemImage: UIImageView!
-    
     @IBOutlet weak var locationDescription: UITextField!
-   
     @IBOutlet weak var datePicker: UIDatePicker!
-    
     @IBOutlet weak var doneBarBtn: UIBarButtonItem!
     @IBOutlet weak var dateSeen: UILabel!
     var location: CLLocation?
     var locationManager = CLLocationManager()
     var creatureToEdit:Creature? = nil
+    var oldName: String = ""
+    var creatureCategory: CreatureCategory = CreatureCategory.Amphibians
+    weak var delegate: ItemDetailViewControllerDelegate?
+    var creatureImage: UIImage?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,7 +46,7 @@ class ItemDetailViewController: UITableViewController {
         let newDate = Date();
         
         let newImage = UIImage()
-        creatureToEdit = Creature(category: CreatureCategory.Amphibians, title: "Cool Frog", description: "a frog i saw at the lake", location: newLocation, locationDescription: "Some Location description", dateSeen: newDate, image: newImage)
+//        creatureToEdit = Creature(category: CreatureCategory.Amphibians, title: "Cool Frog", creatureDescription: "a frog i saw at the lake", location: newLocation, locationDescription: "Some Location description", dateSeen: newDate, image: newImage)
         
     }
 
@@ -73,8 +84,30 @@ class ItemDetailViewController: UITableViewController {
     }
     
     @IBAction func doneBtnClicked(_ sender: Any) {
+        
+        let defaultLocation = CLLocation(latitude: 47.823, longitude: -124.897)
+        if let creature = creatureToEdit {
+            oldName = (creatureToEdit?.title)!
+            creature.title = nameOfTheItem.text!
+            
+            creature.location = defaultLocation
+            creature.dateSeen = datePicker.date
+            creature.category = creatureCategory
+            delegate?.itemDetailViewController(self, didFinishEditing: creature)
+            creature.image = itemImage.image
+        } else {
+            let creature = Creature(category: creatureCategory,
+                                    title: nameOfTheItem.text!,
+                                    creatureDescription: locationDescription.text!,
+                                    location: defaultLocation,
+                                    locationDescription: "Some place I saw it",
+                                    dateSeen: datePicker.date,
+                                    image: itemImage.image!)
+        
+            delegate?.itemDetailViewController(self, didFinishAdding: creature)
+        }
+        
     }
-    
     
     func show(image: UIImage) {
         itemImage.image = image
@@ -82,7 +115,6 @@ class ItemDetailViewController: UITableViewController {
         itemImage.frame = CGRect(x: 10, y: 10, width: 260, height: 260)
         //addPhotoLabel.isHidden = true
     }
-    
 }
 
 extension ItemDetailViewController: UIImagePickerControllerDelegate,
@@ -134,9 +166,10 @@ UINavigationControllerDelegate {
         _ picker: UIImagePickerController,
         didFinishPickingMediaWithInfo info: [String : Any]) {
         
-        creatureToEdit?.image = info[UIImagePickerControllerEditedImage] as? UIImage
+        creatureImage = UIImage()
+        creatureImage? = (info[UIImagePickerControllerEditedImage] as? UIImage)!
         
-        if let theImage = creatureToEdit?.image {
+        if let theImage = creatureImage {
             show(image: theImage)
         }
         

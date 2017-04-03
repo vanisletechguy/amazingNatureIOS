@@ -17,6 +17,8 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
         
         //let delegate = UIApplication.shared.delegate
+        
+        
         dataModel.loadData(delegate:(UIApplication.shared.delegate) as! AppDelegate)
         
     }
@@ -30,6 +32,7 @@ class ViewController: UIViewController {
         let tabbarController = segue.destination as! UITabBarController
         let navVC = tabbarController.viewControllers?[0] as! UINavigationController
         let categoriesVC = navVC.topViewController as! AllCategoriesTableViewController
+        categoriesVC.dataModel = dataModel
     }
 }
 

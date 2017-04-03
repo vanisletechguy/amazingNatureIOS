@@ -56,7 +56,7 @@ class DataModel {
             let newCreature:Creature =
                 Creature(category: CreatureCategory(rawValue: Int(($0 as! CD_Creature).category))!,
                          title: ($0 as! CD_Creature).name!,
-                         description: ($0 as! CD_Creature).description,
+                         creatureDescription: ($0 as! CD_Creature).description,
                          location: CLLocation(latitude: ($0 as! CD_Creature).latitude, longitude: ($0 as! CD_Creature).latitude),
                          locationDescription: ($0 as! CD_Creature).location!,
                          dateSeen: ($0 as! CD_Creature).date as! Date,
@@ -92,7 +92,7 @@ class DataModel {
         
     }
     
-    func editedProvince(editedCreature: Creature,
+    func editedCreature(editedCreature: Creature,
                         oldCreatureName: String) {
         let appDelegate = (UIApplication.shared.delegate) as! AppDelegate
         let context = appDelegate.persistentContainer
