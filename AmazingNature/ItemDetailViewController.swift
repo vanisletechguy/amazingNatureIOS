@@ -41,15 +41,31 @@ class ItemDetailViewController: UITableViewController {
         super.viewDidLoad()
         
         doneBarBtn.isEnabled = true
+        if((creatureToEdit) != nil) {
+            loadCreature()
+        }
         //create a test creature
-        let newLocation = CLLocation(latitude: 49.9, longitude: -126.4)
+    /*    let newLocation = CLLocation(latitude: 49.9, longitude: -126.4)
         let newDate = Date();
         
-        let newImage = UIImage()
+        let newImage = UIImage() */
 //        creatureToEdit = Creature(category: CreatureCategory.Amphibians, title: "Cool Frog", creatureDescription: "a frog i saw at the lake", location: newLocation, locationDescription: "Some Location description", dateSeen: newDate, image: newImage)
         
     }
 
+    func loadCreature() {
+        nameOfTheItem.text = creatureToEdit?.title
+        itemImage.image = creatureToEdit?.image
+        locationDescription.text = creatureToEdit?.locationDescription
+        datePicker.setDate((creatureToEdit?.dateSeen)!, animated: true)
+        dateSeen.text = datePicker.date.description
+        if(creatureToEdit?.image != nil) {
+            show(image: (creatureToEdit?.image)!)
+        } else {
+        }
+        
+        
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

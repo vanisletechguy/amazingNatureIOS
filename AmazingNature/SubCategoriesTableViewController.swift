@@ -90,7 +90,7 @@ class SubCategoriesTableViewController: UITableViewController, ItemDetailViewCon
             ItemDetailViewController
             controller.delegate = self
             controller.creatureCategory = category
-        } else if segue.identifier == "subCategoryListSegue" {
+        } else if segue.identifier == "editItemSegue" {
             let navigationController = segue.destination as! UINavigationController
             let controller = navigationController.topViewController as!
             ItemDetailViewController
