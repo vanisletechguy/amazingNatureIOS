@@ -35,7 +35,7 @@ class ItemDetailViewController: UITableViewController {
     var creatureCategory: CreatureCategory = CreatureCategory.Amphibians
     weak var delegate: ItemDetailViewControllerDelegate?
     var creatureImage: UIImage?
-    
+    var pickingDate = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,6 +44,8 @@ class ItemDetailViewController: UITableViewController {
         if((creatureToEdit) != nil) {
             loadCreature()
         }
+        
+        
         //create a test creature
     /*    let newLocation = CLLocation(latitude: 49.9, longitude: -126.4)
         let newDate = Date();
@@ -76,6 +78,8 @@ class ItemDetailViewController: UITableViewController {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MM-dd-YYYY"
         dateSeen.text = dateFormatter.string(from: datePicker.date)
+        pickingDate = false
+        tableView.reloadData()
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 1 {
@@ -88,9 +92,16 @@ class ItemDetailViewController: UITableViewController {
                             heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.row == 1 {
             return itemImage.isHidden ? 44 : 280
-        } else if indexPath.row == 5 {
+        } else if indexPath.row == 3{
             return 88
-        }
+        } else if indexPath.row == 5 {
+            if(pickingDate){
+                return 88
+
+            } else {
+                return 0
+            }
+                    }
         return 44
     }
 
@@ -132,6 +143,27 @@ class ItemDetailViewController: UITableViewController {
         itemImage.frame = CGRect(x: 10, y: 10, width: 260, height: 260)
         //addPhotoLabel.isHidden = true
     }
+    
+    
+    @IBAction func changeDateBtnclicked(_ sender: Any) {
+        pickingDate = true
+        tableView.reloadData()
+    }
+    
+    
+    @IBAction func useCurrentBtnClicked(_ sender: Any) {
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if(segue.identifier == "MapDetailSegue") {
+            let navVC = segue.destination as! UINavigationController
+            let mapDetailVC = navVC.topViewController as! MapDetailViewController
+            mapDetailVC.location = creatureToEdit?.location
+        }
+    }
+    
+    
+    
 }
 
 extension ItemDetailViewController: UIImagePickerControllerDelegate,
