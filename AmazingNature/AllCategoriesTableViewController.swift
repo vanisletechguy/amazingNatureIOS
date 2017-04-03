@@ -2,7 +2,7 @@
 //  AllCategoriesTableViewController.swift
 //  AmazingNature
 //
-//  Created by vm mac on 2017-03-29.
+//  Created by Michael Aubie on 2017-03-29.
 //  Copyright © 2017 Michael Aubie. All rights reserved.
 //
 
@@ -15,12 +15,6 @@ class AllCategoriesTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
 
     override func tableView(_ tableView: UITableView,
@@ -32,32 +26,38 @@ class AllCategoriesTableViewController: UITableViewController {
             switch indexPath.row {
             case 0:
                 category = "mammals"
-                creatures = dataModel.creatureList.filter({$0.category == CreatureCategory.Mammals})
+                creatures = dataModel.creatureList.filter(
+                    {$0.category == CreatureCategory.Mammals})
                 categoryToSend = .Mammals
                 break
             case 1:
                 category = "Birds"
-                creatures = dataModel.creatureList.filter({$0.category == CreatureCategory.Birds})
+                creatures = dataModel.creatureList.filter(
+                    {$0.category == CreatureCategory.Birds})
                 categoryToSend = .Birds
                 break
             case 2:
                 category = "Fish"
-                creatures = dataModel.creatureList.filter({$0.category == CreatureCategory.Fish})
+                creatures = dataModel.creatureList.filter(
+                    {$0.category == CreatureCategory.Fish})
                 categoryToSend = .Fish
                 break
             case 3:
                 category = "Reptiles"
-                creatures = dataModel.creatureList.filter({$0.category == CreatureCategory.Reptiles})
+                creatures = dataModel.creatureList.filter(
+                    {$0.category == CreatureCategory.Reptiles})
                 categoryToSend = .Reptiles
                 break
             case 4:
                 category = "Amphibians"
-                creatures = dataModel.creatureList.filter({$0.category == CreatureCategory.Amphibians})
+                creatures = dataModel.creatureList.filter(
+                    {$0.category == CreatureCategory.Amphibians})
                 categoryToSend = .Amphibians
                 break
             case 5:
                 category = "Invertebrates"
-                creatures = dataModel.creatureList.filter({$0.category == CreatureCategory.Invertebrates})
+                creatures = dataModel.creatureList.filter(
+                    {$0.category == CreatureCategory.Invertebrates})
                 categoryToSend = .Invertebrates
                 break
             default:
@@ -69,22 +69,26 @@ class AllCategoriesTableViewController: UITableViewController {
             switch indexPath.row {
             case 0:
                 category = "Trees"
-                creatures = dataModel.creatureList.filter({$0.category == CreatureCategory.Trees})
+                creatures = dataModel.creatureList.filter(
+                    {$0.category == CreatureCategory.Trees})
                 categoryToSend = .Trees
                 break
             case 1:
                 category = "Flowers"
-                creatures = dataModel.creatureList.filter({$0.category == CreatureCategory.Flowers})
+                creatures = dataModel.creatureList.filter(
+                    {$0.category == CreatureCategory.Flowers})
                 categoryToSend = .Flowers
                 break
             case 2:
                 category = "Fungi"
-                creatures = dataModel.creatureList.filter({$0.category == CreatureCategory.Fungi})
+                creatures = dataModel.creatureList.filter(
+                    {$0.category == CreatureCategory.Fungi})
                 categoryToSend = .Fungi
                 break
             case 3:
                 category = "Other"
-                creatures = dataModel.creatureList.filter({$0.category == CreatureCategory.PlantOther})
+                creatures = dataModel.creatureList.filter(
+                    {$0.category == CreatureCategory.PlantOther})
                 categoryToSend = .PlantOther
                 break
             default:
@@ -96,32 +100,38 @@ class AllCategoriesTableViewController: UITableViewController {
             switch indexPath.row {
             case 0:
                 category = "Cliffs"
-                creatures = dataModel.creatureList.filter({$0.category == CreatureCategory.Cliffs})
+                creatures = dataModel.creatureList.filter(
+                    {$0.category == CreatureCategory.Cliffs})
                 categoryToSend = .Cliffs
                 break
             case 1:
                 category = "Rivers"
-                creatures = dataModel.creatureList.filter({$0.category == CreatureCategory.Rivers})
+                creatures = dataModel.creatureList.filter(
+                    {$0.category == CreatureCategory.Rivers})
                 categoryToSend = .Rivers
                 break
             case 2:
                 category = "Lakes"
-                creatures = dataModel.creatureList.filter({$0.category == CreatureCategory.Lakes})
+                creatures = dataModel.creatureList.filter(
+                    {$0.category == CreatureCategory.Lakes})
                 categoryToSend = .Lakes
                 break
             case 3:
                 category = "Rocks"
-                creatures = dataModel.creatureList.filter({$0.category == CreatureCategory.Rocks})
+                creatures = dataModel.creatureList.filter(
+                    {$0.category == CreatureCategory.Rocks})
                 categoryToSend = .Rocks
                 break
             case 4:
                 category = "Waterfalls"
-                creatures = dataModel.creatureList.filter({$0.category == CreatureCategory.Waterfalls})
+                creatures = dataModel.creatureList.filter(
+                    {$0.category == CreatureCategory.Waterfalls})
                 categoryToSend = .Waterfalls
                 break
             default:
                 category = ""
-                creatures = dataModel.creatureList.filter({$0.category == CreatureCategory.GeoOther})
+                creatures = dataModel.creatureList.filter(
+                    {$0.category == CreatureCategory.GeoOther})
                 categoryToSend = .GeoOther
                 break
             }
@@ -129,20 +139,16 @@ class AllCategoriesTableViewController: UITableViewController {
         default:
             break
         }
-        print(category)
-        
         creaturesToSend = creatures
         performSegue(withIdentifier: "subCategoryListSegue", sender: category)
-        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let destinationNavC = segue.destination as! UINavigationController
-        let destinationVC = destinationNavC.topViewController as! SubCategoriesTableViewController
+        let destinationVC = destinationNavC.topViewController
+            as! SubCategoriesTableViewController
         destinationVC.creatures = creaturesToSend
         destinationVC.dataModel = dataModel
         destinationVC.category = categoryToSend
     }
-    
-    
 }

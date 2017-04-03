@@ -695,6 +695,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="coordsLabel" destination="xEW-wN-HGd" id="GwZ-11-OK7"/>
                         <outlet property="datePicker" destination="tGM-ph-duR" id="E2W-iS-Jri"/>
                         <outlet property="dateSeen" destination="WAR-75-HWC" id="0nL-eH-jKW"/>
                         <outlet property="doneBarBtn" destination="Ng5-72-9zP" id="TR3-19-lh2"/>

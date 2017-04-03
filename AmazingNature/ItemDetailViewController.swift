@@ -2,13 +2,12 @@
 //  ItemDetailViewController.swift
 //  AmazingNature
 //
-//  Created by vm mac on 2017-03-29.
+//  Created by Michael Aubie on 2017-03-29.
 //  Copyright © 2017 Michael Aubie. All rights reserved.
 //
 
 import UIKit
 import CoreLocation
-
 
 protocol ItemDetailViewControllerDelegate: class {
     func itemDetailViewControllerDidCancel(_ controller:
@@ -28,6 +27,7 @@ class ItemDetailViewController: UITableViewController {
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var doneBarBtn: UIBarButtonItem!
     @IBOutlet weak var dateSeen: UILabel!
+    @IBOutlet weak var coordsLabel: UILabel!
     var location: CLLocation?
     var locationManager = CLLocationManager()
     var creatureToEdit:Creature? = nil
@@ -45,7 +45,6 @@ class ItemDetailViewController: UITableViewController {
             loadCreature()
         }
         
-        
         //create a test creature
     /*    let newLocation = CLLocation(latitude: 49.9, longitude: -126.4)
         let newDate = Date();
@@ -62,18 +61,19 @@ class ItemDetailViewController: UITableViewController {
         datePicker.setDate((creatureToEdit?.dateSeen)!, animated: true)
         dateSeen.text = datePicker.date.description
         location = creatureToEdit?.location
+        var coordsDesc = ""
+        coordsDesc += (creatureToEdit?.location.coordinate.latitude.description)!
+        coordsDesc += " " + (creatureToEdit?.location.coordinate.longitude.description)!
+        coordsLabel.text = coordsDesc
         if(creatureToEdit?.image != nil) {
             show(image: (creatureToEdit?.image)!)
         } else {
         }
-        
-        
     }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
-
     
     @IBAction func dateChanged(_ sender: UIDatePicker) {
         let dateFormatter = DateFormatter()
@@ -82,7 +82,9 @@ class ItemDetailViewController: UITableViewController {
         pickingDate = false
         tableView.reloadData()
     }
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    
+    override func tableView(_ tableView: UITableView,
+                            didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 1 {
             pickPhoto()
             tableView.deselectRow(at: indexPath, animated: true)
@@ -98,11 +100,10 @@ class ItemDetailViewController: UITableViewController {
         } else if indexPath.row == 5 {
             if(pickingDate){
                 return 88
-
             } else {
                 return 0
             }
-                    }
+            }
         return 44
     }
 
@@ -122,20 +123,21 @@ class ItemDetailViewController: UITableViewController {
             creature.dateSeen = datePicker.date
             creature.category = creatureCategory
             creature.image = itemImage.image
+            
             delegate?.itemDetailViewController(self, didFinishEditing: creature)
             
         } else {
-            let creature = Creature(category: creatureCategory,
-                                    title: nameOfTheItem.text!,
-                                    creatureDescription: locationDescription.text!,
-                                    location: defaultLocation,
-                                    locationDescription: "Some place I saw it",
-                                    dateSeen: datePicker.date,
-                                    image: itemImage.image!)
+            let creature =
+                Creature(category: creatureCategory,
+                         title: nameOfTheItem.text!,
+                         creatureDescription: locationDescription.text!,
+                         location: defaultLocation,
+                         locationDescription: "Some place I saw it",
+                         dateSeen: datePicker.date,
+                         image: itemImage.image!)
         
             delegate?.itemDetailViewController(self, didFinishAdding: creature)
         }
-        
     }
     
     func show(image: UIImage) {
@@ -158,19 +160,22 @@ class ItemDetailViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if(segue.identifier == "MapDetailSegue") {
             let navVC = segue.destination as! UINavigationController
-            let mapDetailVC = navVC.topViewController as! MapDetailViewController
+            let mapDetailVC =
+                navVC.topViewController as! MapDetailViewController
             if(creatureToEdit?.location != nil) {
-            mapDetailVC.location = CLLocation(latitude: (creatureToEdit?.location.coordinate.latitude)!, longitude: (creatureToEdit?.location.coordinate.longitude)!)
-                print(creatureToEdit?.location.coordinate.latitude.description, " ", creatureToEdit?.location.coordinate.longitude.description)
+            mapDetailVC.location = CLLocation(
+                latitude: (creatureToEdit?.location.coordinate.latitude)!,
+                longitude: (creatureToEdit?.location.coordinate.longitude)!)
+                print(creatureToEdit?.location.coordinate.latitude.description,
+                      " ",
+                      creatureToEdit?.location.coordinate.longitude.description)
                 //creatureToEdit?.location
             } else {
-                mapDetailVC.location = CLLocation(latitude: 47.5, longitude: -124.3)
+                mapDetailVC.location =
+                    CLLocation(latitude: 47.5, longitude: -124.3)
             }
         }
     }
-    
-    
-    
 }
 
 extension ItemDetailViewController: UIImagePickerControllerDelegate,
@@ -236,6 +241,5 @@ UINavigationControllerDelegate {
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
     }
-    
 }
 

@@ -2,7 +2,7 @@
 //  MapViewController.swift
 //  AmazingNature
 //
-//  Created by vm mac on 2017-03-29.
+//  Created by Michael Aubie on 2017-03-29.
 //  Copyright © 2017 Michael Aubie. All rights reserved.
 //
 
@@ -20,23 +20,19 @@ class MapViewController: UIViewController {
         
         location = CLLocation(latitude: 49.5, longitude: -128.3)
         mapView.frame = self.view.bounds
-        let coordinateRegion =
-            MKCoordinateRegionMakeWithDistance((location?.coordinate)!, 500, 500)
+        let coordinateRegion = MKCoordinateRegionMakeWithDistance(
+            (location?.coordinate)!, 500, 500)
         mapView.setRegion(coordinateRegion, animated: true)
         
         let annotation = MKPointAnnotation();
         annotation.coordinate = (location?.coordinate)!;
         mapView.addAnnotation(annotation);
 
-
-        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
-    
 
     @IBAction func backBtnPressed(_ sender: Any) {
          dismiss(animated: true, completion: nil)

@@ -29,7 +29,8 @@ public class CD_Creature: NSManagedObject {
 //                return
 //            }
             
-            self.imageData = (UIImageJPEGRepresentation(newItem.image!, 1) as NSData?)
+            self.imageData =
+                (UIImageJPEGRepresentation(newItem.image!, 1) as NSData?)
             //self.imageData = imageData as NSData?
         }
         
