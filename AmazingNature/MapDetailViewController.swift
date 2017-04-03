@@ -11,6 +11,8 @@ import MapKit
 
 class MapDetailViewController: UIViewController, MKMapViewDelegate{
     var location: CLLocation?
+    var creatureTitle = ""
+    var image: UIImage?
 
     @IBOutlet weak var mapView: MKMapView!
     override func viewDidLoad() {
@@ -22,19 +24,20 @@ class MapDetailViewController: UIViewController, MKMapViewDelegate{
         mapView.setRegion(coordinateRegion, animated: true)
         
         let annotation = MKPointAnnotation()
-        let annotation2 = MKAnnotationView()
+        
+        //let annotation2 = MKAnnotationView()
         annotation.coordinate = (location?.coordinate)!
-        annotation2.annotation = annotation
+        annotation.title = "HEHEHE"
+        //annotation2.annotation = annotation
     
-       annotation2.isEnabled = true
-       annotation2.isDraggable = true
+       //annotation2.isEnabled = true
+       //annotation2.isDraggable = true
         
         
         //mapView.addAnnotation(annotation2)
         mapView.addAnnotation(annotation);
-        //mapView.addAnnotation(annotation);
         
-        
+
         mapView.delegate = self
 
     }
@@ -48,15 +51,19 @@ class MapDetailViewController: UIViewController, MKMapViewDelegate{
                 //return nil so map view draws "blue dot" for standard user location
                 return nil
             }
-            
+        
+        
             let reuseId = "pin"
             
             var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKPinAnnotationView
             if pinView == nil {
                 pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+                
                 pinView!.canShowCallout = true
                 pinView!.animatesDrop = true
                 pinView!.pinColor = .purple
+                pinView?.isDraggable = true
+                
             }
             else {
                 pinView!.annotation = annotation

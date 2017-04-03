@@ -170,6 +170,7 @@ class ItemDetailViewController: UITableViewController {
                       " ",
                       creatureToEdit?.location.coordinate.longitude.description)
                 //creatureToEdit?.location
+                mapDetailVC.creatureTitle = (creatureToEdit?.title)!
             } else {
                 mapDetailVC.location =
                     CLLocation(latitude: 47.5, longitude: -124.3)
