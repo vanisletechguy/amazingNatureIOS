@@ -55,7 +55,7 @@ class ItemDetailViewController: UITableViewController {
 
     func loadCreature() {
         nameOfTheItem.text = creatureToEdit?.title
-        itemImage.image = creatureToEdit?.image
+        //itemImage.image = creatureToEdit?.image
         locationDescription.text = creatureToEdit?.locationDescription
         datePicker.setDate((creatureToEdit?.dateSeen)!, animated: true)
         dateSeen.text = datePicker.date.description
@@ -109,8 +109,9 @@ class ItemDetailViewController: UITableViewController {
             creature.location = defaultLocation
             creature.dateSeen = datePicker.date
             creature.category = creatureCategory
-            delegate?.itemDetailViewController(self, didFinishEditing: creature)
             creature.image = itemImage.image
+            delegate?.itemDetailViewController(self, didFinishEditing: creature)
+            
         } else {
             let creature = Creature(category: creatureCategory,
                                     title: nameOfTheItem.text!,

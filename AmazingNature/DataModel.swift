@@ -53,6 +53,20 @@ class DataModel {
         creatureList = []
         
         let _ = cdCreatureList.map{
+            
+            var creatureImage:UIImage? = UIImage()
+
+            if let imageData = (($0 as! CD_Creature).imageData) {
+                if let loadedImage = UIImage(data: (imageData as NSData) as Data) {
+                    creatureImage = loadedImage
+                    print(imageData.description)
+                    
+                    let newCgIm = loadedImage.cgImage?.copy()
+                    creatureImage = UIImage(cgImage: newCgIm!, scale: loadedImage.scale, orientation: loadedImage.imageOrientation)
+                    
+                }
+            }
+            
             let newCreature:Creature =
                 Creature(category: CreatureCategory(rawValue: Int(($0 as! CD_Creature).category))!,
                          title: ($0 as! CD_Creature).name!,
@@ -60,7 +74,7 @@ class DataModel {
                          location: CLLocation(latitude: ($0 as! CD_Creature).latitude, longitude: ($0 as! CD_Creature).latitude),
                          locationDescription: ($0 as! CD_Creature).location!,
                          dateSeen: ($0 as! CD_Creature).date as! Date,
-                         image: UIImage())
+                         image: creatureImage!)
             
             creatureList.append(newCreature)
             

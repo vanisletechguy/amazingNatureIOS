@@ -35,7 +35,7 @@ class Creature: NSObject {
         self.location = location
         self.locationDescription = locationDescription
         self.dateSeen = dateSeen
-        
+        self.image = image
         
     }
 

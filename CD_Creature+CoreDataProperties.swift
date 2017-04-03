@@ -2,7 +2,7 @@
 //  CD_Creature+CoreDataProperties.swift
 //  AmazingNature
 //
-//  Created by vm mac on 2017-03-31.
+//  Created by vm mac on 2017-04-02.
 //  Copyright © 2017 Michael Aubie. All rights reserved.
 //
 
@@ -17,11 +17,12 @@ extension CD_Creature {
     }
 
     @NSManaged public var category: Int64
+    @NSManaged public var date: NSDate?
+    @NSManaged public var latitude: Double
+    @NSManaged public var location: String?
+    @NSManaged public var longitude: Double
     @NSManaged public var name: String?
     @NSManaged public var notes: String?
-    @NSManaged public var latitude: Double
-    @NSManaged public var longitude: Double
-    @NSManaged public var location: String?
-    @NSManaged public var date: NSDate?
+    @NSManaged public var imageData: NSData?
 
 }
