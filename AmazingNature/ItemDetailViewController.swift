@@ -61,6 +61,7 @@ class ItemDetailViewController: UITableViewController {
         locationDescription.text = creatureToEdit?.locationDescription
         datePicker.setDate((creatureToEdit?.dateSeen)!, animated: true)
         dateSeen.text = datePicker.date.description
+        location = creatureToEdit?.location
         if(creatureToEdit?.image != nil) {
             show(image: (creatureToEdit?.image)!)
         } else {
@@ -158,7 +159,13 @@ class ItemDetailViewController: UITableViewController {
         if(segue.identifier == "MapDetailSegue") {
             let navVC = segue.destination as! UINavigationController
             let mapDetailVC = navVC.topViewController as! MapDetailViewController
-            mapDetailVC.location = creatureToEdit?.location
+            if(creatureToEdit?.location != nil) {
+            mapDetailVC.location = CLLocation(latitude: (creatureToEdit?.location.coordinate.latitude)!, longitude: (creatureToEdit?.location.coordinate.longitude)!)
+                print(creatureToEdit?.location.coordinate.latitude.description, " ", creatureToEdit?.location.coordinate.longitude.description)
+                //creatureToEdit?.location
+            } else {
+                mapDetailVC.location = CLLocation(latitude: 47.5, longitude: -124.3)
+            }
         }
     }
     
