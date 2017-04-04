@@ -19,8 +19,8 @@ protocol ItemDetailViewControllerDelegate: class {
 }
 
 
-class ItemDetailViewController: UITableViewController {
-    
+class ItemDetailViewController: UITableViewController, MapDetailViewControllerDelegate {
+    let defaultLocation = CLLocation(latitude: 47.823, longitude: -124.897)
     @IBOutlet weak var nameOfTheItem: UITextField!
     @IBOutlet weak var itemImage: UIImageView!
     @IBOutlet weak var locationDescription: UITextField!
@@ -36,7 +36,7 @@ class ItemDetailViewController: UITableViewController {
     weak var delegate: ItemDetailViewControllerDelegate?
     var creatureImage: UIImage?
     var pickingDate = false
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -61,6 +61,7 @@ class ItemDetailViewController: UITableViewController {
         datePicker.setDate((creatureToEdit?.dateSeen)!, animated: true)
         dateSeen.text = datePicker.date.description
         location = creatureToEdit?.location
+        if(location == nil) { location = defaultLocation }
         var coordsDesc = ""
         coordsDesc += (creatureToEdit?.location.coordinate.latitude.description)!
         coordsDesc += " " + (creatureToEdit?.location.coordinate.longitude.description)!
@@ -114,12 +115,12 @@ class ItemDetailViewController: UITableViewController {
     
     @IBAction func doneBtnClicked(_ sender: Any) {
         
-        let defaultLocation = CLLocation(latitude: 47.823, longitude: -124.897)
+        
         if let creature = creatureToEdit {
             oldName = (creatureToEdit?.title)!
             creature.title = nameOfTheItem.text!
             
-            creature.location = defaultLocation
+            creature.location = location!
             creature.dateSeen = datePicker.date
             creature.category = creatureCategory
             creature.image = itemImage.image
@@ -131,7 +132,7 @@ class ItemDetailViewController: UITableViewController {
                 Creature(category: creatureCategory,
                          title: nameOfTheItem.text!,
                          creatureDescription: locationDescription.text!,
-                         location: defaultLocation,
+                         location: location!,
                          locationDescription: "Some place I saw it",
                          dateSeen: datePicker.date,
                          image: itemImage.image!)
@@ -162,6 +163,7 @@ class ItemDetailViewController: UITableViewController {
             let navVC = segue.destination as! UINavigationController
             let mapDetailVC =
                 navVC.topViewController as! MapDetailViewController
+            mapDetailVC.delegate = self
             if(creatureToEdit?.location != nil) {
             mapDetailVC.location = CLLocation(
                 latitude: (creatureToEdit?.location.coordinate.latitude)!,
@@ -176,6 +178,16 @@ class ItemDetailViewController: UITableViewController {
                     CLLocation(latitude: 47.5, longitude: -124.3)
             }
         }
+    }
+    
+    func didChangeLocation(newLocation: CLLocation) {
+        creatureToEdit?.location = newLocation
+        location = newLocation
+        var coordsDesc = ""
+        coordsDesc += (creatureToEdit?.location.coordinate.latitude.description)!
+        coordsDesc += " "
+        coordsDesc += (creatureToEdit?.location.coordinate.longitude.description)!
+        coordsLabel.text = coordsDesc
     }
 }
 

@@ -9,11 +9,16 @@
 import UIKit
 import MapKit
 
+protocol MapDetailViewControllerDelegate: class {
+    func didChangeLocation(newLocation: CLLocation)
+}
+
 class MapDetailViewController: UIViewController, MKMapViewDelegate{
     var location: CLLocation?
     var creatureTitle = ""
     var image: UIImage?
-
+    weak var delegate: MapDetailViewControllerDelegate?
+    
     @IBOutlet weak var mapView: MKMapView!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,7 +47,34 @@ class MapDetailViewController: UIViewController, MKMapViewDelegate{
 
     }
     
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, didChange newState: MKAnnotationViewDragState, fromOldState oldState: MKAnnotationViewDragState) {
+        switch newState {
+        case .starting:
+            //view.dragState = .dragging
+            break
+            
+        case .ending:
+            view.dragState = .none
+                        let newLatitude = view.annotation?.coordinate.latitude
+                        let newLongitude = view.annotation?.coordinate.longitude
+                        let newLocation = CLLocation(latitude: newLatitude!, longitude: newLongitude!)
+                       updateMarker(newLocation: newLocation)
+            break
+
+            
+        case .canceling:
+            view.dragState = .none
+            break
+            
+        default: break
+        }
+    }
     
+    func updateMarker(newLocation: CLLocation) {
+        print("GOT TO UPDATE MARKER")
+        location = newLocation
+        delegate?.didChangeLocation(newLocation: location!)
+    }
 
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         
