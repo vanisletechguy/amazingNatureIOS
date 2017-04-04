@@ -32,7 +32,7 @@ class MapDetailViewController: UIViewController, MKMapViewDelegate{
         
         //let annotation2 = MKAnnotationView()
         annotation.coordinate = (location?.coordinate)!
-        annotation.title = "HEHEHE"
+        annotation.title = creatureTitle
         //annotation2.annotation = annotation
     
        //annotation2.isEnabled = true
@@ -60,8 +60,6 @@ class MapDetailViewController: UIViewController, MKMapViewDelegate{
                         let newLocation = CLLocation(latitude: newLatitude!, longitude: newLongitude!)
                        updateMarker(newLocation: newLocation)
             break
-
-            
         case .canceling:
             view.dragState = .none
             break
@@ -84,9 +82,7 @@ class MapDetailViewController: UIViewController, MKMapViewDelegate{
                 return nil
             }
         
-        
             let reuseId = "pin"
-            
             var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKPinAnnotationView
             if pinView == nil {
                 pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)

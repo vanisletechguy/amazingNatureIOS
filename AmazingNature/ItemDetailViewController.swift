@@ -61,7 +61,9 @@ class ItemDetailViewController: UITableViewController, MapDetailViewControllerDe
         datePicker.setDate((creatureToEdit?.dateSeen)!, animated: true)
         dateSeen.text = datePicker.date.description
         location = creatureToEdit?.location
-        if(location == nil) { location = defaultLocation }
+        if(location == nil) {
+            location = defaultLocation
+        }
         var coordsDesc = ""
         coordsDesc += (creatureToEdit?.location.coordinate.latitude.description)!
         coordsDesc += " " + (creatureToEdit?.location.coordinate.longitude.description)!
@@ -114,17 +116,13 @@ class ItemDetailViewController: UITableViewController, MapDetailViewControllerDe
     }
     
     @IBAction func doneBtnClicked(_ sender: Any) {
-        
-        
         if let creature = creatureToEdit {
             oldName = (creatureToEdit?.title)!
             creature.title = nameOfTheItem.text!
-            
             creature.location = location!
             creature.dateSeen = datePicker.date
             creature.category = creatureCategory
             creature.image = itemImage.image
-            
             delegate?.itemDetailViewController(self, didFinishEditing: creature)
             
         } else {
@@ -154,7 +152,6 @@ class ItemDetailViewController: UITableViewController, MapDetailViewControllerDe
         tableView.reloadData()
     }
     
-    
     @IBAction func useCurrentBtnClicked(_ sender: Any) {
     }
     
@@ -168,9 +165,9 @@ class ItemDetailViewController: UITableViewController, MapDetailViewControllerDe
             mapDetailVC.location = CLLocation(
                 latitude: (creatureToEdit?.location.coordinate.latitude)!,
                 longitude: (creatureToEdit?.location.coordinate.longitude)!)
-                print(creatureToEdit?.location.coordinate.latitude.description,
-                      " ",
-                      creatureToEdit?.location.coordinate.longitude.description)
+//                print(creatureToEdit?.location.coordinate.latitude.description,
+//                      " ",
+//                      creatureToEdit?.location.coordinate.longitude.description)
                 //creatureToEdit?.location
                 mapDetailVC.creatureTitle = (creatureToEdit?.title)!
             } else {

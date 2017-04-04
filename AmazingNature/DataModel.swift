@@ -24,8 +24,8 @@ class DataModel {
         var managedObjectContext: NSManagedObjectContext!
         managedObjectContext = context.viewContext
         
-        let x = context
-        let y = context.viewContext
+//        let x = context
+//        let y = context.viewContext
 
         let fetchRequest =
             NSFetchRequest<CD_Creature>(entityName: "CD_Creature")
@@ -67,7 +67,7 @@ class DataModel {
                          creatureDescription: ($0 as! CD_Creature).description,
                          location: CLLocation(
                             latitude: ($0 as! CD_Creature).latitude,
-                            longitude: ($0 as! CD_Creature).latitude),
+                            longitude: ($0 as! CD_Creature).longitude),
                          locationDescription: ($0 as! CD_Creature).location!,
                          dateSeen: ($0 as! CD_Creature).date as! Date,
                          image: creatureImage!)

@@ -9,9 +9,13 @@
 import UIKit
 import MapKit
 
+//protocol MapViewControllerDelegate {
+////    func passCreatureLocations()
+//}
 class MapViewController: UIViewController {
 
     var location: CLLocation?
+    var creatures = [Creature]()
     
     @IBOutlet weak var mapView: MKMapView!
     
@@ -27,6 +31,17 @@ class MapViewController: UIViewController {
         let annotation = MKPointAnnotation();
         annotation.coordinate = (location?.coordinate)!;
         mapView.addAnnotation(annotation);
+        print("there are " + creatures.count.description + " creatures")
+        
+        for creature in creatures {
+            let newAnnotation = MKPointAnnotation();
+            newAnnotation.coordinate = (creature.location.coordinate)
+            mapView.addAnnotation(newAnnotation);
+            print(newAnnotation.coordinate.longitude.description)
+            print(newAnnotation.coordinate.latitude.description)
+        }
+        
+        
 
     }
 
