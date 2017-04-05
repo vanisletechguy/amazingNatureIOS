@@ -24,27 +24,18 @@ class MapDetailViewController: UIViewController, MKMapViewDelegate{
         super.viewDidLoad()
 
         mapView.frame = self.view.bounds
-        let coordinateRegion = MKCoordinateRegionMakeWithDistance(
+        var coordinateRegion = MKCoordinateRegionMakeWithDistance(
             (location?.coordinate)!, 500, 500)
+        coordinateRegion.span.latitudeDelta = 50
+        coordinateRegion.span.longitudeDelta = 50
         mapView.setRegion(coordinateRegion, animated: true)
         
         let annotation = MKPointAnnotation()
         
-        //let annotation2 = MKAnnotationView()
         annotation.coordinate = (location?.coordinate)!
         annotation.title = creatureTitle
-        //annotation2.annotation = annotation
-    
-       //annotation2.isEnabled = true
-       //annotation2.isDraggable = true
-        
-        
-        //mapView.addAnnotation(annotation2)
-        mapView.addAnnotation(annotation);
-        
-
+        mapView.addAnnotation(annotation)
         mapView.delegate = self
-
     }
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, didChange newState: MKAnnotationViewDragState, fromOldState oldState: MKAnnotationViewDragState) {

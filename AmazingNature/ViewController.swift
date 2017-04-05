@@ -27,5 +27,17 @@ class ViewController: UIViewController {
         let categoriesVC = navVC.topViewController as! AllCategoriesTableViewController
         categoriesVC.dataModel = dataModel
     }
+    
+    
+    @IBAction func generateBtnClicked(_ sender: Any) {
+        dataModel.generateNewData()
+        dataModel.loadData(delegate: (UIApplication.shared.delegate) as! AppDelegate)
+    }
+    
+    
+    @IBAction func wipeDataBtnClicked(_ sender: Any) {
+        dataModel.deleteAllData()
+        dataModel.loadData(delegate: (UIApplication.shared.delegate) as! AppDelegate)
+    }
 }
 

@@ -57,6 +57,7 @@ class SubCategoriesTableViewController: UITableViewController,
         tableView.insertRows(at: indexPaths, with: .automatic)
         controller.dismiss(animated: true, completion: nil)
     }
+    
     func itemDetailViewController(_ controller: ItemDetailViewController,
                                   didFinishEditing creature: Creature) {
         if let index = creatures.index(of: creature) {

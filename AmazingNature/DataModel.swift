@@ -23,9 +23,6 @@ class DataModel {
         let context = appDelegate.persistentContainer
         var managedObjectContext: NSManagedObjectContext!
         managedObjectContext = context.viewContext
-        
-//        let x = context
-//        let y = context.viewContext
 
         let fetchRequest =
             NSFetchRequest<CD_Creature>(entityName: "CD_Creature")
@@ -45,7 +42,6 @@ class DataModel {
     func importFromCoreData(cdCreatureList: [NSManagedObject],
                             context: NSManagedObjectContext) {
         creatureList = []
-        
         let _ = cdCreatureList.map{
             var creatureImage:UIImage? = UIImage()
             if let imageData = (($0 as! CD_Creature).imageData) {
@@ -77,7 +73,6 @@ class DataModel {
                 NSFetchRequest<CD_Creature>(entityName: "CD_Creature")
         }
     }
-    
                                             //add and edit should have a func to make sure the name is unique
     func addNewCreature(newCreature: Creature) {
         creatureList.append(newCreature)
@@ -111,4 +106,88 @@ class DataModel {
             print("could not save after adding item to province")
         }
     }
+    
+    
+    
+    func deleteAllData() {
+        let appDelegate = (UIApplication.shared.delegate) as! AppDelegate
+        let context = appDelegate.persistentContainer
+        var managedObjectContext: NSManagedObjectContext!
+        managedObjectContext = context.viewContext
+        let fetchRequest = NSFetchRequest<CD_Creature>(entityName: "CD_Creature")
+//        fetchRequest.predicate = NSPredicate.init(format: "name = %@",
+//                                                  creatureName)
+        let creaturesToDelete = try! managedObjectContext.fetch(fetchRequest)
+        
+        
+        for creature in creaturesToDelete {
+            managedObjectContext.delete(creature)
+        }
+        
+        do {
+            try managedObjectContext.save()
+        } catch {
+            print("could not delete")
+        }
+    }
+
+    func generateNewData() {
+        let appDelegate = (UIApplication.shared.delegate) as! AppDelegate
+        let context = appDelegate.persistentContainer
+        var managedObjectContext: NSManagedObjectContext!
+        managedObjectContext = context.viewContext
+        
+        
+        var newAmphibian =
+            Creature(category: .Amphibians, title: "A slimy toad",
+                     creatureDescription: "A pretty cool frog",
+                     location: CLLocation(latitude: 43.22, longitude: -123.55),
+                     locationDescription: "In a swap near Thriftys",
+                     dateSeen: Date(), image: #imageLiteral(resourceName: "amphibians"))
+        
+        var newBird =
+            Creature(category: .Birds, title: "Bluebird",
+                     creatureDescription: "A pretty cool frog",
+                     location: CLLocation(latitude: 41.22, longitude: -122.55),
+                     locationDescription: "In a tree by Walmart",
+                     dateSeen: Date(), image: #imageLiteral(resourceName: "birds"))
+        
+        var newReptile =
+            Creature(category: .Reptiles, title: "Cool Lizard",
+                     creatureDescription: "A pretty cool lizazd",
+                     location: CLLocation(latitude: 41.92, longitude: -121.55),
+                     locationDescription: "In a pet shop",
+                     dateSeen: Date(), image: #imageLiteral(resourceName: "reptiles"))
+        
+        var newMammal =
+            Creature(category: .Mammals, title: "Male Lion",
+                     creatureDescription: "What a beast",
+                     location: CLLocation(latitude: 40.92, longitude: -114.55),
+                     locationDescription: "On safari",
+                     dateSeen: Date(), image: #imageLiteral(resourceName: "Mammals"))
+
+        
+        
+        creatureList.append(newAmphibian)
+        creatureList.append(newBird)
+        creatureList.append(newReptile)
+        creatureList.append(newMammal)
+        let cdNewAmphibian = CD_Creature(context: managedObjectContext)
+        let cdNewBird = CD_Creature(context: managedObjectContext)
+        let cdNewReptile = CD_Creature(context: managedObjectContext)
+        let cdNewMammal = CD_Creature(context: managedObjectContext)
+        cdNewAmphibian.copyCreature(newItem: newAmphibian)
+        appDelegate.saveContext()
+        cdNewBird.copyCreature(newItem: newBird)
+        appDelegate.saveContext()
+        cdNewReptile.copyCreature(newItem: newReptile)
+        appDelegate.saveContext()
+        cdNewMammal.copyCreature(newItem: newMammal)
+        appDelegate.saveContext()
+    }
+    
+    
+    
+    
+    
 }

@@ -24,9 +24,13 @@ class MapViewController: UIViewController {
         
         location = CLLocation(latitude: 49.5, longitude: -128.3)
         mapView.frame = self.view.bounds
-        let coordinateRegion = MKCoordinateRegionMakeWithDistance(
+        var coordinateRegion = MKCoordinateRegionMakeWithDistance(
             (location?.coordinate)!, 500, 500)
+        coordinateRegion.span.latitudeDelta = 50
+        coordinateRegion.span.longitudeDelta = 50
         mapView.setRegion(coordinateRegion, animated: true)
+        //mapView.camera.set
+       
         
         let annotation = MKPointAnnotation();
         annotation.coordinate = (location?.coordinate)!;
@@ -36,6 +40,8 @@ class MapViewController: UIViewController {
         for creature in creatures {
             let newAnnotation = MKPointAnnotation();
             newAnnotation.coordinate = (creature.location.coordinate)
+            newAnnotation.title = creature.title
+            newAnnotation.subtitle = creature.locationDescription
             mapView.addAnnotation(newAnnotation);
             print(newAnnotation.coordinate.longitude.description)
             print(newAnnotation.coordinate.latitude.description)
