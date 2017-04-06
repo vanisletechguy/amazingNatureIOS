@@ -2,7 +2,7 @@
 //  CD_Creature+CoreDataProperties.swift
 //  AmazingNature
 //
-//  Created by vm mac on 2017-04-02.
+//  Created by Michael Aubie on 2017-04-02.
 //  Copyright © 2017 Michael Aubie. All rights reserved.
 //
 

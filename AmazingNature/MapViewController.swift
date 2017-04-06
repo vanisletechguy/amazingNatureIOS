@@ -9,14 +9,9 @@
 import UIKit
 import MapKit
 
-//protocol MapViewControllerDelegate {
-////    func passCreatureLocations()
-//}
 class MapViewController: UIViewController {
-
     var location: CLLocation?
     var creatures = [Creature]()
-    
     @IBOutlet weak var mapView: MKMapView!
     
     override func viewDidLoad() {
@@ -29,8 +24,6 @@ class MapViewController: UIViewController {
         coordinateRegion.span.latitudeDelta = 50
         coordinateRegion.span.longitudeDelta = 50
         mapView.setRegion(coordinateRegion, animated: true)
-        
-       
         
         let annotation = MKPointAnnotation();
         annotation.coordinate = (location?.coordinate)!;
@@ -46,9 +39,7 @@ class MapViewController: UIViewController {
             print(newAnnotation.coordinate.longitude.description)
             print(newAnnotation.coordinate.latitude.description)
         }
-        
         mapView.showsUserLocation = true
-
     }
 
     override func didReceiveMemoryWarning() {

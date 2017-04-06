@@ -2,7 +2,7 @@
 //  CD_Creature+CoreDataClass.swift
 //  AmazingNature
 //
-//  Created by vm mac on 2017-03-31.
+//  Created by Michael Aubie on 2017-03-31.
 //  Copyright © 2017 Michael Aubie. All rights reserved.
 //
 
@@ -22,20 +22,9 @@ public class CD_Creature: NSManagedObject {
         self.category = Int64(newItem.category.hashValue)
         
         if(newItem.image != nil) {
-//            guard let self.imageData = (UIImageJPEGRepresentation(newItem.image!,1) as NSData)
-//        else {
-//                // handle failed conversion
-//                print("jpg error")
-//                return
-//            }
-            
             self.imageData =
                 (UIImageJPEGRepresentation(newItem.image!, 1) as NSData?)
-            //self.imageData = imageData as NSData?
         }
-        
-        
-    
     }
 
 }

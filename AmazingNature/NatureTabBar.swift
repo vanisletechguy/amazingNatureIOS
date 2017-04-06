@@ -2,7 +2,7 @@
 //  NatureTabBar.swift
 //  AmazingNature
 //
-//  Created by vm mac on 2017-04-04.
+//  Created by Michael Aubie on 2017-04-04.
 //  Copyright © 2017 Michael Aubie. All rights reserved.
 //
 
@@ -12,13 +12,10 @@ class NatureTabBar: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {

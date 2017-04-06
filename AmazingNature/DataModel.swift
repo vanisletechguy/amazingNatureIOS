@@ -73,7 +73,7 @@ class DataModel {
                 NSFetchRequest<CD_Creature>(entityName: "CD_Creature")
         }
     }
-                                            //add and edit should have a func to make sure the name is unique
+    
     func addNewCreature(newCreature: Creature) {
         creatureList.append(newCreature)
         
@@ -107,18 +107,13 @@ class DataModel {
         }
     }
     
-    
-    
     func deleteAllData() {
         let appDelegate = (UIApplication.shared.delegate) as! AppDelegate
         let context = appDelegate.persistentContainer
         var managedObjectContext: NSManagedObjectContext!
         managedObjectContext = context.viewContext
         let fetchRequest = NSFetchRequest<CD_Creature>(entityName: "CD_Creature")
-//        fetchRequest.predicate = NSPredicate.init(format: "name = %@",
-//                                                  creatureName)
         let creaturesToDelete = try! managedObjectContext.fetch(fetchRequest)
-        
         
         for creature in creaturesToDelete {
             managedObjectContext.delete(creature)
@@ -137,22 +132,21 @@ class DataModel {
         var managedObjectContext: NSManagedObjectContext!
         managedObjectContext = context.viewContext
         
-        
-        var newAmphibian =
+        let newAmphibian =
             Creature(category: .Amphibians, title: "A slimy toad",
                      creatureDescription: "A pretty cool frog",
                      location: CLLocation(latitude: 43.22, longitude: -123.55),
                      locationDescription: "In a swap near Thriftys",
                      dateSeen: Date(), image: #imageLiteral(resourceName: "amphibians"))
         
-        var newBird =
+        let newBird =
             Creature(category: .Birds, title: "Bluebird",
                      creatureDescription: "A pretty cool frog",
                      location: CLLocation(latitude: 41.22, longitude: -122.55),
                      locationDescription: "In a tree by Walmart",
                      dateSeen: Date(), image: #imageLiteral(resourceName: "birds"))
         
-        var newReptile =
+        let newReptile =
             Creature(category: .Reptiles, title: "Cool Lizard",
                      creatureDescription: "A pretty cool lizazd",
                      location: CLLocation(latitude: 41.92, longitude: -121.55),
@@ -194,9 +188,4 @@ class DataModel {
         cdNewFlower.copyCreature(newItem: newFlower)
         appDelegate.saveContext()
     }
-    
-    
-    
-    
-    
 }

@@ -92,7 +92,6 @@ class SubCategoriesTableViewController: UITableViewController,
             let controller = navigationController.topViewController as!
             ItemDetailViewController
             controller.delegate = self
-           
             controller.creatureCategory = category
             if let indexPath = tableView.indexPath(
                 for: sender as! UITableViewCell) {
@@ -101,5 +100,4 @@ class SubCategoriesTableViewController: UITableViewController,
             }
         }
     }
-
 }

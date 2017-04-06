@@ -13,7 +13,8 @@ protocol MapDetailViewControllerDelegate: class {
     func didChangeLocation(newLocation: CLLocation)
 }
 
-class MapDetailViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate{
+class MapDetailViewController: UIViewController, MKMapViewDelegate,
+CLLocationManagerDelegate{
     var location: CLLocation?
     var creatureTitle = ""
     var image: UIImage?
@@ -40,16 +41,22 @@ class MapDetailViewController: UIViewController, MKMapViewDelegate, CLLocationMa
         mapView.showsUserLocation = true
     }
     
-    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, didChange newState: MKAnnotationViewDragState, fromOldState oldState: MKAnnotationViewDragState) {
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView,
+                 didChange newState: MKAnnotationViewDragState,
+                 fromOldState oldState: MKAnnotationViewDragState) {
         switch newState {
         case .starting:
             break
             
         case .ending:
             view.dragState = .none
-                        let newLatitude = view.annotation?.coordinate.latitude
-                        let newLongitude = view.annotation?.coordinate.longitude
-                        let newLocation = CLLocation(latitude: newLatitude!, longitude: newLongitude!)
+                        let newLatitude =
+                            view.annotation?.coordinate.latitude
+                        let newLongitude =
+                            view.annotation?.coordinate.longitude
+                        let newLocation =
+                            CLLocation(latitude: newLatitude!,
+                                       longitude: newLongitude!)
                        updateMarker(newLocation: newLocation)
             break
         case .canceling:
@@ -66,29 +73,26 @@ class MapDetailViewController: UIViewController, MKMapViewDelegate, CLLocationMa
         delegate?.didChangeLocation(newLocation: location!)
     }
 
-    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+    func mapView(_ mapView: MKMapView,
+                 viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         
+        if annotation is MKUserLocation {
+            return nil
+        }
         
-            if annotation is MKUserLocation {
-                //return nil so map view draws "blue dot" for standard user location
-                return nil
-            }
-        
-            let reuseId = "pin"
-            var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKPinAnnotationView
-            if pinView == nil {
-                pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
-                pinView!.canShowCallout = true
-                pinView!.animatesDrop = true
-                pinView!.pinColor = .purple
-                pinView?.isDraggable = true
-                
-            }
-            else {
-                pinView!.annotation = annotation
-            }
-            
-            return pinView
+        let reuseId = "pin"
+        var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKPinAnnotationView
+        if pinView == nil {
+            pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+            pinView!.canShowCallout = true
+            pinView!.animatesDrop = true
+            pinView!.tintColor = .purple
+            pinView?.isDraggable = true
+        }
+        else {
+            pinView!.annotation = annotation
+        }
+        return pinView
     }
     
     override func didReceiveMemoryWarning() {

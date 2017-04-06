@@ -11,28 +11,34 @@ import UIKit
 class ViewController: UIViewController {
 
     var dataModel: DataModel!
-    let alertController = UIAlertController(title: "Data Options", message: "What would you like to do?", preferredStyle: .actionSheet)
+    let alertController =
+        UIAlertController(title: "Data Options",
+                          message: "What would you like to do?",
+                          preferredStyle: .actionSheet)
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        dataModel.loadData(delegate:(UIApplication.shared.delegate) as! AppDelegate)
+        dataModel.loadData(delegate:(UIApplication.shared.delegate)
+            as! AppDelegate)
         
-        let generateButton = UIAlertAction(title: "Generate Sample Data", style: .default, handler: { (action) -> Void in
-            print("Ok button tapped")
+        let generateButton =
+            UIAlertAction(title: "Generate Sample Data", style: .default,
+                          handler: { (action) -> Void in
             
             self.dataModel.generateNewData()
-            self.dataModel.loadData(delegate: (UIApplication.shared.delegate) as! AppDelegate)
+            self.dataModel.loadData(delegate:
+                (UIApplication.shared.delegate) as! AppDelegate)
         })
         
-        let  deleteButton = UIAlertAction(title: "Delete All Data", style: .destructive, handler: { (action) -> Void in
-            print("Delete button tapped")
+        let  deleteButton = UIAlertAction(title: "Delete All Data",
+                                          style: .destructive,
+                                          handler: { (action) -> Void in
             
             self.dataModel.deleteAllData()
             self.dataModel.loadData(delegate: (UIApplication.shared.delegate) as! AppDelegate)
         })
         
         let cancelButton = UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) -> Void in
-            print("Cancel button tapped")
         })
         
         alertController.addAction(generateButton)
@@ -51,16 +57,8 @@ class ViewController: UIViewController {
         categoriesVC.dataModel = dataModel
     }
     
-    
     @IBAction func optionsBtnClicked(_ sender: Any) {
-        
-
-        
         self.present(alertController, animated: true, completion: nil)
-        
     }
-    
-
-    
 }
 

@@ -18,8 +18,8 @@ protocol ItemDetailViewControllerDelegate: class {
                                   didFinishEditing item: Creature)
 }
 
-
-class ItemDetailViewController: UITableViewController, MapDetailViewControllerDelegate {
+class ItemDetailViewController: UITableViewController,
+MapDetailViewControllerDelegate {
     let defaultLocation = CLLocation(latitude: 47.823, longitude: -124.897)
     @IBOutlet weak var nameOfTheItem: UITextField!
     @IBOutlet weak var itemImage: UIImageView!
@@ -58,8 +58,10 @@ class ItemDetailViewController: UITableViewController, MapDetailViewControllerDe
             location = defaultLocation
         }
         var coordsDesc = ""
-        coordsDesc += (creatureToEdit?.location.coordinate.latitude.description)!
-        coordsDesc += " " + (creatureToEdit?.location.coordinate.longitude.description)!
+        coordsDesc +=
+            (creatureToEdit?.location.coordinate.latitude.description)!
+        coordsDesc +=
+            " " + (creatureToEdit?.location.coordinate.longitude.description)!
         coordsLabel.text = coordsDesc
         if(creatureToEdit?.image != nil) {
             show(image: (creatureToEdit?.image)!)
@@ -117,7 +119,6 @@ class ItemDetailViewController: UITableViewController, MapDetailViewControllerDe
             creature.category = creatureCategory
             creature.image = itemImage.image
             delegate?.itemDetailViewController(self, didFinishEditing: creature)
-            
         } else {
             let creature =
                 Creature(category: creatureCategory,
@@ -127,7 +128,6 @@ class ItemDetailViewController: UITableViewController, MapDetailViewControllerDe
                          locationDescription: "Some place I saw it",
                          dateSeen: datePicker.date,
                          image: itemImage.image!)
-        
             delegate?.itemDetailViewController(self, didFinishAdding: creature)
         }
     }
@@ -169,9 +169,11 @@ class ItemDetailViewController: UITableViewController, MapDetailViewControllerDe
         creatureToEdit?.location = newLocation
         location = newLocation
         var coordsDesc = ""
-        coordsDesc += (creatureToEdit?.location.coordinate.latitude.description)!
+        coordsDesc +=
+            (creatureToEdit?.location.coordinate.latitude.description)!
         coordsDesc += " "
-        coordsDesc += (creatureToEdit?.location.coordinate.longitude.description)!
+        coordsDesc +=
+            (creatureToEdit?.location.coordinate.longitude.description)!
         coordsLabel.text = coordsDesc
     }
 }
@@ -200,7 +202,6 @@ UINavigationControllerDelegate {
             UIAlertAction(title: "Choose From Library",
                           style: .default, handler: { _ in self
                             .choosePhotoFromLibrary() })
-        
         alertController.addAction(chooseFromLibraryAction)
         present(alertController, animated: true, completion: nil)
     }
@@ -226,7 +227,8 @@ UINavigationControllerDelegate {
         didFinishPickingMediaWithInfo info: [String : Any]) {
         
         creatureImage = UIImage()
-        creatureImage? = (info[UIImagePickerControllerEditedImage] as? UIImage)!
+        creatureImage? =
+            (info[UIImagePickerControllerEditedImage] as? UIImage)!
         
         if let theImage = creatureImage {
             show(image: theImage)

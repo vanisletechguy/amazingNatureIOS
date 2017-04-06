@@ -53,51 +53,66 @@ class AllCategoriesTableViewController: UITableViewController {
         var creatures = [Creature]()
         creatures = dataModel.creatureList.filter(
             {$0.category == CreatureCategory.Mammals})
-        MammalsCell.detailTextLabel?.text = String(creatures.count.description + " items")
+        MammalsCell.detailTextLabel?.text =
+            String(creatures.count.description + " items")
         creatures = dataModel.creatureList.filter(
             {$0.category == CreatureCategory.Birds})
-        BirdsCell.detailTextLabel?.text = String(creatures.count.description + " items")
+        BirdsCell.detailTextLabel?.text =
+            String(creatures.count.description + " items")
         creatures = dataModel.creatureList.filter(
             {$0.category == CreatureCategory.Fish})
-        FishCell.detailTextLabel?.text = String(creatures.count.description + " items")
+        FishCell.detailTextLabel?.text =
+            String(creatures.count.description + " items")
         creatures = dataModel.creatureList.filter(
             {$0.category == CreatureCategory.Reptiles})
-        ReptilesCell.detailTextLabel?.text = String(creatures.count.description + " items")
+        ReptilesCell.detailTextLabel?.text =
+            String(creatures.count.description + " items")
         creatures = dataModel.creatureList.filter(
             {$0.category == CreatureCategory.Amphibians})
-        AmphibiansCell.detailTextLabel?.text = String(creatures.count.description + " items")
+        AmphibiansCell.detailTextLabel?.text =
+            String(creatures.count.description + " items")
         creatures = dataModel.creatureList.filter(
             {$0.category == CreatureCategory.Invertebrates})
-        InvertebratesCell.detailTextLabel?.text = String(creatures.count.description + " items")
+        InvertebratesCell.detailTextLabel?.text =
+            String(creatures.count.description + " items")
         
         creatures = dataModel.creatureList.filter(
             {$0.category == CreatureCategory.Trees})
-        TreesCell.detailTextLabel?.text = String(creatures.count.description + " items")
+        TreesCell.detailTextLabel?.text =
+            String(creatures.count.description + " items")
         creatures = dataModel.creatureList.filter(
             {$0.category == CreatureCategory.Flowers})
-        FlowersCell.detailTextLabel?.text = String(creatures.count.description + " items")
+        FlowersCell.detailTextLabel?.text =
+            String(creatures.count.description + " items")
         creatures = dataModel.creatureList.filter(
             {$0.category == CreatureCategory.Fungi})
-        FungiCell.detailTextLabel?.text = String(creatures.count.description + " items")
+        FungiCell.detailTextLabel?.text =
+            String(creatures.count.description + " items")
         creatures = dataModel.creatureList.filter(
             {$0.category == CreatureCategory.PlantOther})
-        PlantsOtherCell.detailTextLabel?.text = String(creatures.count.description + " items")
+        PlantsOtherCell.detailTextLabel?.text =
+            String(creatures.count.description + " items")
         
         creatures = dataModel.creatureList.filter(
             {$0.category == CreatureCategory.Cliffs})
-        CliffsCell.detailTextLabel?.text = String(creatures.count.description + " items")
+        CliffsCell.detailTextLabel?.text =
+            String(creatures.count.description + " items")
         creatures = dataModel.creatureList.filter(
             {$0.category == CreatureCategory.Rivers})
-        RiversCell.detailTextLabel?.text = String(creatures.count.description + " items")
+        RiversCell.detailTextLabel?.text =
+            String(creatures.count.description + " items")
         creatures = dataModel.creatureList.filter(
             {$0.category == CreatureCategory.Lakes})
-        LakesCell.detailTextLabel?.text = String(creatures.count.description + " items")
+        LakesCell.detailTextLabel?.text =
+            String(creatures.count.description + " items")
         creatures = dataModel.creatureList.filter(
             {$0.category == CreatureCategory.Rocks})
-        RocksCell.detailTextLabel?.text = String(creatures.count.description + " items")
+        RocksCell.detailTextLabel?.text =
+            String(creatures.count.description + " items")
         creatures = dataModel.creatureList.filter(
             {$0.category == CreatureCategory.Waterfalls})
-        WaterfallsCell.detailTextLabel?.text = String(creatures.count.description + " items")
+        WaterfallsCell.detailTextLabel?.text =
+            String(creatures.count.description + " items")
     }
     
     override func tableView(_ tableView: UITableView,
@@ -222,7 +237,6 @@ class AllCategoriesTableViewController: UITableViewController {
         default:
             break
         }
-        
         creaturesToSend = creatures
         performSegue(withIdentifier: "subCategoryListSegue", sender: category)
     }
@@ -239,9 +253,4 @@ class AllCategoriesTableViewController: UITableViewController {
     @IBAction func backBtnPressed(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
-    
-    
-    
-    
-    
 }
