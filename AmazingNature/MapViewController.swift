@@ -29,7 +29,7 @@ class MapViewController: UIViewController {
         coordinateRegion.span.latitudeDelta = 50
         coordinateRegion.span.longitudeDelta = 50
         mapView.setRegion(coordinateRegion, animated: true)
-        //mapView.camera.set
+        
        
         
         let annotation = MKPointAnnotation();
@@ -47,7 +47,7 @@ class MapViewController: UIViewController {
             print(newAnnotation.coordinate.latitude.description)
         }
         
-        
+        mapView.showsUserLocation = true
 
     }
 

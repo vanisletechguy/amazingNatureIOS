@@ -40,7 +40,9 @@ class ItemDetailViewController: UITableViewController, MapDetailViewControllerDe
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        location = defaultLocation
         doneBarBtn.isEnabled = true
+        itemImage.image = #imageLiteral(resourceName: "flowers")
         if((creatureToEdit) != nil) {
             loadCreature()
         }

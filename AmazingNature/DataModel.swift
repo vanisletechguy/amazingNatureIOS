@@ -166,16 +166,23 @@ class DataModel {
                      locationDescription: "On safari",
                      dateSeen: Date(), image: #imageLiteral(resourceName: "Mammals"))
 
-        
+        var newFlower =
+            Creature(category: .Flowers, title: "Purple Flower",
+                     creatureDescription: "Amazing",
+                     location: CLLocation(latitude: 32.92, longitude: -104.55),
+                     locationDescription: "In Peter's Park",
+                     dateSeen: Date(), image: #imageLiteral(resourceName: "flowers"))
         
         creatureList.append(newAmphibian)
         creatureList.append(newBird)
         creatureList.append(newReptile)
         creatureList.append(newMammal)
+        creatureList.append(newFlower)
         let cdNewAmphibian = CD_Creature(context: managedObjectContext)
         let cdNewBird = CD_Creature(context: managedObjectContext)
         let cdNewReptile = CD_Creature(context: managedObjectContext)
         let cdNewMammal = CD_Creature(context: managedObjectContext)
+        let cdNewFlower = CD_Creature(context: managedObjectContext)
         cdNewAmphibian.copyCreature(newItem: newAmphibian)
         appDelegate.saveContext()
         cdNewBird.copyCreature(newItem: newBird)
@@ -183,6 +190,8 @@ class DataModel {
         cdNewReptile.copyCreature(newItem: newReptile)
         appDelegate.saveContext()
         cdNewMammal.copyCreature(newItem: newMammal)
+        appDelegate.saveContext()
+        cdNewFlower.copyCreature(newItem: newFlower)
         appDelegate.saveContext()
     }
     

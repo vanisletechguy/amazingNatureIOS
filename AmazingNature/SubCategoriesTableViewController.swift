@@ -16,6 +16,7 @@ class SubCategoriesTableViewController: UITableViewController,
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = "\(category)"
     }
 
     override func didReceiveMemoryWarning() {
@@ -91,10 +92,12 @@ class SubCategoriesTableViewController: UITableViewController,
             let controller = navigationController.topViewController as!
             ItemDetailViewController
             controller.delegate = self
+           
             controller.creatureCategory = category
             if let indexPath = tableView.indexPath(
                 for: sender as! UITableViewCell) {
                 controller.creatureToEdit = creatures[indexPath.row]
+                controller.title = creatures[indexPath.row].title
             }
         }
     }
