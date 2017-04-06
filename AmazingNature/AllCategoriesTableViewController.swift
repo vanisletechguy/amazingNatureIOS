@@ -8,7 +8,8 @@
 
 import UIKit
 
-class AllCategoriesTableViewController: UITableViewController {
+class AllCategoriesTableViewController: UITableViewController,
+SubCategoriesProtocol {
     var dataModel: DataModel!
     var creaturesToSend = [Creature]()
     var categoryToSend = CreatureCategory.Amphibians
@@ -248,6 +249,15 @@ class AllCategoriesTableViewController: UITableViewController {
         destinationVC.creatures = creaturesToSend
         destinationVC.dataModel = dataModel
         destinationVC.category = categoryToSend
+        destinationVC.delegate = self
+    }
+    
+    func didChangeData(dataModel: DataModel) {
+        self.dataModel = dataModel
+        dataModel.loadData(delegate:(UIApplication.shared.delegate)
+            as! AppDelegate)
+        setCellsInfo()
+        tableView.reloadData()
     }
     
     @IBAction func backBtnPressed(_ sender: Any) {

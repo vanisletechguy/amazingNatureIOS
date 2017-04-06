@@ -107,12 +107,32 @@ class DataModel {
         }
     }
     
+    func deleteCreature(creatureName: String) {
+        
+        let appDelegate = (UIApplication.shared.delegate) as! AppDelegate
+        let context = appDelegate.persistentContainer
+        var managedObjectContext: NSManagedObjectContext!
+        managedObjectContext = context.viewContext
+        let fetchRequest =
+            NSFetchRequest<CD_Creature>(entityName: "CD_Creature")
+        fetchRequest.predicate = NSPredicate.init(format: "name = %@",
+                                                  creatureName)
+        let attractionToDelete = try! managedObjectContext.fetch(fetchRequest)
+        managedObjectContext.delete(attractionToDelete[0])
+        do {
+            try managedObjectContext.save()
+        } catch {
+            print("could not save after deleting item")
+        }
+    }
+    
     func deleteAllData() {
         let appDelegate = (UIApplication.shared.delegate) as! AppDelegate
         let context = appDelegate.persistentContainer
         var managedObjectContext: NSManagedObjectContext!
         managedObjectContext = context.viewContext
-        let fetchRequest = NSFetchRequest<CD_Creature>(entityName: "CD_Creature")
+        let fetchRequest =
+            NSFetchRequest<CD_Creature>(entityName: "CD_Creature")
         let creaturesToDelete = try! managedObjectContext.fetch(fetchRequest)
         
         for creature in creaturesToDelete {

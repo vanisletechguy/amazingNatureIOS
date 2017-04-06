@@ -8,11 +8,15 @@
 
 import UIKit
 
+protocol SubCategoriesProtocol {
+    func didChangeData(dataModel: DataModel)
+}
 class SubCategoriesTableViewController: UITableViewController,
                                         ItemDetailViewControllerDelegate {
     var creatures = [Creature]()
     var dataModel: DataModel!
     var category = CreatureCategory.Amphibians
+    var delegate: SubCategoriesProtocol?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,6 +60,7 @@ class SubCategoriesTableViewController: UITableViewController,
         let indexPath = IndexPath(row: newRowIndex, section: 0)
         let indexPaths = [indexPath]
         tableView.insertRows(at: indexPaths, with: .automatic)
+        delegate?.didChangeData(dataModel: dataModel)
         controller.dismiss(animated: true, completion: nil)
     }
     
@@ -71,9 +76,25 @@ class SubCategoriesTableViewController: UITableViewController,
                 label.text = item.title
             }
         }
+        delegate?.didChangeData(dataModel: dataModel)
         dismiss(animated: true, completion: nil)
     }
     
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        
+        let creatureName = creatures[indexPath.row].title
+        dataModel.deleteCreature(creatureName: creatureName)
+        
+        creatures.remove(at: indexPath.row)
+        
+        let indexPaths = [indexPath]
+        
+        tableView.deleteRows(at: indexPaths, with: .automatic)
+        
+        delegate?.didChangeData(dataModel: dataModel)
+        
+        
+    }
     func itemDetailViewControllerDidCancel(_ controller:
         ItemDetailViewController) {
     }
